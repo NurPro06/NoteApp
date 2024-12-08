@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,11 +10,15 @@
     tools:context=".ui.fragments.onboard.OnBoardPagingFragment">
     <TextView
         android:id="@+id/txt_notes"
+        android:layout_marginTop="76dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:textSize="24sp"
         android:textColor="@color/white"
         android:fontFamily="@font/aaaaa"
         android:text="Notes"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="32dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -24,31 +28,75 @@
         android:layout_height="250dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="46dp"
+        app:layout_constraintTop_toBottomOf="@id/txt_notes"
+        android:layout_marginTop="32dp"
         app:lottie_rawRes="@raw/first"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"/>
-
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="280dp"
+    android:layout_height="125dp"
+    android:layout_marginTop="46dp"
+    android:layout_marginBottom="232dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/lottieAnimation"
+    android:id="@+id/container_view"
+    android:orientation="vertical">
     <TextView
         android:id="@+id/txt_title"
         android:textSize="28sp"
         android:textColor="@color/white"
         android:text="Удобство"
         android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/txt_body"
         android:textSize="16sp"
-        android:layout_marginTop="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_title"
+        android:layout_marginTop="7dp"
         android:textAlignment="center"
         android:textColor="#CFCFCF"
         android:text="Создавайте заметки в два клика! Записывайте мысли, идеи и важные задачи мгновенно."
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+   <androidx.appcompat.widget.AppCompatButton
+       android:layout_width="12dp"
+       android:id="@+id/btn1"
+       android:background="@drawable/indicators"
+       android:layout_marginBottom="175dp"
+       android:layout_marginEnd="6dp"
+       app:layout_constraintEnd_toStartOf="@id/btn2"
+       app:layout_constraintBottom_toBottomOf="parent"
+       android:layout_height="12dp"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="12dp"
+        android:id="@+id/btn2"
+        android:layout_marginBottom="175dp"
+        android:background="@drawable/indicators"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="12dp"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn3"
+        android:layout_marginStart="6dp"
+        android:layout_width="12dp"
+        android:background="@drawable/indicators"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn2"
+        android:layout_marginBottom="175dp"
+        android:layout_height="12dp"/>
 
 
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
