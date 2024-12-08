@@ -68,33 +68,7 @@
         android:layout_height="wrap_content" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-   <androidx.appcompat.widget.AppCompatButton
-       android:layout_width="12dp"
-       android:id="@+id/btn1"
-       android:background="@drawable/indicators"
-       android:layout_marginBottom="175dp"
-       android:layout_marginEnd="6dp"
-       app:layout_constraintEnd_toStartOf="@id/btn2"
-       app:layout_constraintBottom_toBottomOf="parent"
-       android:layout_height="12dp"/>
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="12dp"
-        android:id="@+id/btn2"
-        android:layout_marginBottom="175dp"
-        android:background="@drawable/indicators"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_height="12dp"/>
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn3"
-        android:layout_marginStart="6dp"
-        android:layout_width="12dp"
-        android:background="@drawable/indicators"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn2"
-        android:layout_marginBottom="175dp"
-        android:layout_height="12dp"/>
+
 
 
 

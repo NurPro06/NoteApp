@@ -33,36 +33,22 @@ class OnBoardPagingFragment : Fragment() {
     private fun initialize() = with(binding) {
         when(requireArguments().getInt(ARG_ONBOARD_POSITION)){
             0->{
-                btn1.setBackgroundResource(R.drawable.indicators)
-                val newColor = ContextCompat.getColor(requireContext(), R.color.orange)
-                val drawable = GradientDrawable()
-                drawable.shape = GradientDrawable.OVAL
-                drawable.setColor(newColor)
-                btn1.background = drawable
+
+
 
                 lottieAnimation.setAnimation(R.raw.first)
                 txtTitle.text = "Удобство"
                 txtBody.text = "Создавайте заметки в два клика! Записывайте мысли, идеи и важные задачи мгновенно."
             }
             1->{
-                btn2.setBackgroundResource(R.drawable.indicators)
-                val newColor = ContextCompat.getColor(requireContext(), R.color.orange)
-                val drawable = GradientDrawable()
-                drawable.shape = GradientDrawable.OVAL
-                drawable.setColor(newColor)
-                btn2.background = drawable
+
 
                 lottieAnimation.setAnimation(R.raw.sigma)
                 txtTitle.text = "Организация"
                 txtBody.text = "Организуйте заметки по папкам и тегам. Легко находите нужную информацию в любое время."
             }
             2->{
-                btn3.setBackgroundResource(R.drawable.indicators)
-                val newColor = ContextCompat.getColor(requireContext(), R.color.orange)
-                val drawable = GradientDrawable()
-                drawable.shape = GradientDrawable.OVAL
-                drawable.setColor(newColor)
-                btn3.background = drawable
+
 
                 lottieAnimation.setAnimation(R.raw.third)
                 txtTitle.text = "Синхронизация"

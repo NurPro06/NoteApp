@@ -32,6 +32,7 @@ class OnBoardFragment : Fragment() {
 
     private fun initialize() {
         binding.viewpager2.adapter = OnBoardViewpagerAdapter(this)
+        binding.dots1.attachTo(binding.viewpager2)
     }
 
     private fun setupListeners() = with(binding.viewpager2) {
