@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.noteapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.noteapp"
@@ -33,6 +33,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -45,4 +48,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation (libs.lottie.v600)
+    implementation(libs.dotsindicator)
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 }
