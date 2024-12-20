@@ -5,14 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.noteapp.R
 import com.example.noteapp.databinding.FragmentOnBoardBinding
 import com.example.noteapp.ui.adapters.OnBoardViewpagerAdapter
+import com.example.noteapp.utlis.PreferenceHelper
 
 
 class OnBoardFragment : Fragment() {
     private lateinit var binding: FragmentOnBoardBinding
+    private lateinit var sharedPreferences: PreferenceHelper
 
 
     override fun onCreateView(
@@ -25,8 +28,15 @@ class OnBoardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initialize()
-        setupListeners()
+        sharedPreferences = PreferenceHelper()
+        sharedPreferences.unit(requireContext())
+
+        if (sharedPreferences.isOnBoardShown) {
+            findNavController().navigate(R.id.action_onBoardFragment_to_noteFragment)
+        } else {
+            initialize()
+            setupListeners()
+        }
     }
 
 
@@ -40,16 +50,23 @@ class OnBoardFragment : Fragment() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 if (position == 2) {
-                    binding.txtSkip.visibility = View.INVISIBLE
                     binding.btnStart.visibility = View.VISIBLE
+                    binding.txtSkip.visibility = View.GONE
                 } else {
-                    binding.txtSkip.visibility = View.VISIBLE
                     binding.btnStart.visibility = View.GONE
+                    binding.txtSkip.visibility = View.VISIBLE
                     binding.txtSkip.setOnClickListener {
-                        setCurrentItem(currentItem + 2, true)
+                        if (currentItem < 3) {
+                            setCurrentItem(currentItem + 2, true)
+                        }
                     }
                 }
             }
         })
+        binding.btnStart.setOnClickListener {
+            sharedPreferences.isOnBoardShown = true
+            findNavController().navigate(R.id.action_onBoardFragment_to_noteFragment)
+
+        }
     }
 }
