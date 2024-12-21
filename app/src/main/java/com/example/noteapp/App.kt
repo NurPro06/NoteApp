@@ -2,12 +2,12 @@ package com.example.noteapp
 
 import android.app.Application
 import androidx.room.Room
-import com.example.noteapp.ui.fragments.noteapp.data.database.AppDatabase
+import com.example.noteapp.data.db.AppDataBase
 import com.example.noteapp.utlis.PreferenceHelper
 
 class App : Application() {
     companion object {
-        var appDatabase: AppDatabase? = null
+        var appDatabase: AppDataBase? = null
     }
     override fun onCreate() {
         super.onCreate()
@@ -16,14 +16,16 @@ class App : Application() {
         getInstance()
     }
 
-    private fun getInstance(): AppDatabase? {
+    private fun getInstance(): AppDataBase? {
         if (appDatabase == null) {
             appDatabase = applicationContext?.let { context ->
                 Room.databaseBuilder(
                     context,
-                    AppDatabase::class.java,
-                    "database"
-                ).fallbackToDestructiveMigrationFrom().allowMainThreadQueries().build()
+                    AppDataBase::class.java,
+                    "note.database"
+                ).fallbackToDestructiveMigration()
+                    .allowMainThreadQueries()
+                    .build()
 
             }
         }

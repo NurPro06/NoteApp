@@ -56,4 +56,6 @@ dependencies {
     val roomVersion = "2.6.1"
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
+    implementation (libs.androidx.lifecycle.livedata.ktx)
+    implementation (libs.androidx.lifecycle.viewmodel.ktx)
 }
