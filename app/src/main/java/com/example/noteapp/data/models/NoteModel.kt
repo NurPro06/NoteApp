@@ -1,4 +1,4 @@
-package com.example.noteapp.ui.fragments.noteapp.data.models
+package com.example.noteapp.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class NoteModel(
     val title: String,
     val description: String,
+    val date: String
 ){
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
