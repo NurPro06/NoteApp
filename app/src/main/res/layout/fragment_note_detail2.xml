@@ -49,7 +49,6 @@
 
 
     <TextView
-        android:visibility="invisible"
         android:id="@+id/tv_save"
         app:layout_constraintTop_toTopOf="@id/iv_back"
         app:layout_constraintEnd_toEndOf="parent"
