@@ -22,7 +22,6 @@ import com.example.noteapp.databinding.FragmentNote2Binding
 import com.example.noteapp.ui.adapters.NoteAdapter
 import com.example.noteapp.ui.interfaces.OnClickItem
 import com.example.noteapp.utlis.PreferenceHelper
-import java.util.jar.Manifest
 
 
 class NoteFragment : Fragment(), OnClickItem {
@@ -53,6 +52,7 @@ class NoteFragment : Fragment(), OnClickItem {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedPreferences = PreferenceHelper()
         requestNotificationPermission()
         initialize()
         setupListener()
@@ -61,17 +61,20 @@ class NoteFragment : Fragment(), OnClickItem {
 
     private fun requestNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            when{
+            when {
                 ContextCompat.checkSelfPermission(
                     requireContext(),
-                    Manifest.permission.POST_NOTIFICATIONS
+                    android.Manifest.permission.POST_NOTIFICATIONS
                 ) == PackageManager.PERMISSION_GRANTED -> {
+                }
+                shouldShowRequestPermissionRationale(android.Manifest.permission.POST_NOTIFICATIONS) -> {
 
-                } shoultShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) -> {
-            }else -> {
-                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
+                else -> {
+                    requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+                }
             }
-            }
+
         }
     }
 

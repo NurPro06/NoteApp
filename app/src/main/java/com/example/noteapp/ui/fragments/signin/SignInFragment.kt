@@ -48,8 +48,7 @@ class SignInFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        sharedPreferences = PreferenceHelper()
-        sharedPreferences.unit(requireContext())
+        preferenceHelper.init(requireContext())
         binding = FragmentSignInBinding.inflate(inflater, container, false)
         auth = Firebase.auth
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
