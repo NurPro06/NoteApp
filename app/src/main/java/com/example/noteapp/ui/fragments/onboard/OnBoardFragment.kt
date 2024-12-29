@@ -21,18 +21,17 @@ class OnBoardFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentOnBoardBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sharedPreferences = PreferenceHelper()
-        sharedPreferences.unit(requireContext())
 
-        if (sharedPreferences.isOnBoardShown) {
-            findNavController().navigate(R.id.action_onBoardFragment_to_noteFragment)
+
+        if (sharedPreferences.isOnBoardingCompleted()) {
+            findNavController().navigate(R.id.action_onBoardFragment_to_signInFragment)
         } else {
             initialize()
             setupListeners()
@@ -43,6 +42,7 @@ class OnBoardFragment : Fragment() {
     private fun initialize() {
         binding.viewpager2.adapter = OnBoardViewpagerAdapter(this)
         binding.dots1.attachTo(binding.viewpager2)
+
     }
 
     private fun setupListeners() = with(binding.viewpager2) {
@@ -64,9 +64,10 @@ class OnBoardFragment : Fragment() {
             }
         })
         binding.btnStart.setOnClickListener {
-            sharedPreferences.isOnBoardShown = true
-            findNavController().navigate(R.id.action_onBoardFragment_to_noteFragment)
+            sharedPreferences.setOnBoardingCompleted(true)
+            findNavController().navigate(R.id.action_onBoardFragment_to_signInFragment)
 
         }
     }
+
 }

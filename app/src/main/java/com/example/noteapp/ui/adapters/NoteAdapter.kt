@@ -24,13 +24,14 @@ class NoteAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.onBind(getItem(position))
+        holder.itemView.setOnClickListener{
+            onClick.onClick(getItem(position))
+        }
 
         holder.itemView.setOnLongClickListener {
             onLongClick.onLongClick(getItem(position))
             true
-        }
-        holder.itemView.setOnClickListener {
-            onClick.onClick(getItem(position))
+
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
