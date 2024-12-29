@@ -22,6 +22,8 @@ class OnBoardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        sharedPreferences = PreferenceHelper()
+        sharedPreferences.init(requireContext())
         binding = FragmentOnBoardBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -30,7 +32,7 @@ class OnBoardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        if (sharedPreferences.isOnBoardingCompleted()) {
+        if (sharedPreferences.isOnBoardingCompleted(true)) {
             findNavController().navigate(R.id.action_onBoardFragment_to_signInFragment)
         } else {
             initialize()
