@@ -1,6 +1,8 @@
 package com.example.noteapp.ui.fragments.note
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -35,7 +37,7 @@ class NoteDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.tvDate.text = getCurrentTime()
-        if (binding.titleEditText.text != null && binding.titleEditText.text != null) {
+        if (binding.titleEditText.text != null && binding.textEditText.text != null) {
             binding.tvSave.visibility = View.VISIBLE
         }
         updateNote()
@@ -43,13 +45,14 @@ class NoteDetailFragment : Fragment() {
 
     }
 
+
     private fun updateNote() {
         arguments?.let { args ->
             noteId = args.getInt("noteId", -1)
         }
         if (noteId != -1) {
-            val id = App.appDatabase?.noteDao()?.getById(noteId!!)
-            id?.let { item ->
+            val note = App.appDatabase?.noteDao()?.getById(noteId!!)
+            note?.let { item ->
                 binding.titleEditText.setText(item.title)
                 binding.textEditText.setText(item.description)
                 binding.tvDate.text = item.date
@@ -59,28 +62,99 @@ class NoteDetailFragment : Fragment() {
 
     private fun setupListener() = with(binding) {
         ivColor.setOnClickListener {
-            Log.d("nurba", "ivColor click")
             showColorDialog()
         }
-        ivBack.setOnClickListener {
+        titleEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                if (titleEditText.text.toString().isNotEmpty() && textEditText.text.toString()
+                        .isNotEmpty()
+                ) {
+                    tvSave.visibility = View.VISIBLE
+                } else if (titleEditText.text.toString().isEmpty() && textEditText.text.toString()
+                        .isEmpty()
+                ) {
+                    tvSave.visibility = View.GONE
+
+                }
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (titleEditText.text.toString().isNotEmpty() && textEditText.text.toString()
+                        .isEmpty()
+                ) {
+                    tvSave.visibility = View.VISIBLE
+                } else {
+                    tvSave.visibility = View.GONE
+                }
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (titleEditText.text.toString().isNotEmpty() && textEditText.text.toString()
+                        .isNotEmpty()
+                ) {
+                    tvSave.visibility = View.VISIBLE
+                } else if (titleEditText.text.toString().isEmpty() && textEditText.text.toString().isEmpty()){
+                    tvSave.visibility = View.GONE
+
+                }
+            }
+        })
+        tvDate.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+                if (textEditText.text.toString().isNotEmpty() && textEditText.toString().isNotEmpty()){
+                    tvSave.visibility = View.VISIBLE
+                }else if (textEditText.text.toString().isEmpty() && textEditText.text.toString().isEmpty()){
+                    tvSave.visibility = View.GONE
+                }
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (textEditText.text.toString().isNotEmpty() && textEditText.text.toString().isNotEmpty()){
+                    tvSave.visibility = View.VISIBLE
+                }else {
+                    tvSave.visibility = View.GONE
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (textEditText.text.toString().isNotEmpty() && textEditText.text.toString().isNotEmpty()){
+                    tvSave.visibility = View.VISIBLE
+                }else if (textEditText.text.toString().isEmpty() && textEditText.text.toString().isEmpty()){
+                    tvSave.visibility = View.GONE
+                }
+            }
+
+        })
+        ivBack.setOnClickListener{
             findNavController().navigateUp()
         }
-        tvSave.setOnClickListener {
+        tvSave.setOnClickListener{
             val title = titleEditText.text.toString()
             val text = textEditText.text.toString()
-            val data = tvDate.text.toString()
+            val date = tvDate.text.toString()
             val color = color
             if (noteId != -1) {
-                val updateNote = NoteModel(title, text, data, color.hashCode())
+                val updateNote = NoteModel(title, text, date, color.hashCode())
                 updateNote.id = noteId!!
                 App.appDatabase?.noteDao()?.updateNote(updateNote)
 
-            } else {
-                App.appDatabase?.noteDao()?.insertNote(NoteModel(title, text, data, color.hashCode()))
+        }else {
+            App.appDatabase?.noteDao()
+                ?.insertNote(NoteModel(title, text, date, color.hashCode()))
+
             }
+
             findNavController().navigateUp()
         }
     }
+
 
     private fun showColorDialog() {
         val builder = AlertDialog.Builder(requireContext())
