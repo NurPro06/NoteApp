@@ -65,7 +65,10 @@ class NoteDetailFragment : Fragment() {
             showColorDialog()
         }
         titleEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int, count: Int, after: Int
+            ) {
                 if (titleEditText.text.toString().isNotEmpty() && textEditText.text.toString()
                         .isNotEmpty()
                 ) {
@@ -95,47 +98,59 @@ class NoteDetailFragment : Fragment() {
                         .isNotEmpty()
                 ) {
                     tvSave.visibility = View.VISIBLE
-                } else if (titleEditText.text.toString().isEmpty() && textEditText.text.toString().isEmpty()){
+                } else if (titleEditText.text.toString().isEmpty() && textEditText.text.toString()
+                        .isEmpty()
+                ) {
                     tvSave.visibility = View.GONE
 
                 }
             }
         })
-        tvDate.addTextChangedListener(object : TextWatcher{
+        tvDate.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence?,
                 start: Int,
                 count: Int,
                 after: Int
             ) {
-                if (textEditText.text.toString().isNotEmpty() && textEditText.toString().isNotEmpty()){
+                if (textEditText.text.toString().isNotEmpty() && textEditText.toString()
+                        .isNotEmpty()
+                ) {
                     tvSave.visibility = View.VISIBLE
-                }else if (textEditText.text.toString().isEmpty() && textEditText.text.toString().isEmpty()){
+                } else if (textEditText.text.toString().isEmpty() && textEditText.text.toString()
+                        .isEmpty()
+                ) {
                     tvSave.visibility = View.GONE
                 }
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (textEditText.text.toString().isNotEmpty() && textEditText.text.toString().isNotEmpty()){
+                if (textEditText.text.toString().isNotEmpty() && textEditText.text.toString()
+                        .isNotEmpty()
+                ) {
                     tvSave.visibility = View.VISIBLE
-                }else {
+                } else {
                     tvSave.visibility = View.GONE
                 }
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if (textEditText.text.toString().isNotEmpty() && textEditText.text.toString().isNotEmpty()){
+                if (textEditText.text.toString().isNotEmpty() && textEditText.text.toString()
+                        .isNotEmpty()
+                ) {
                     tvSave.visibility = View.VISIBLE
-                }else if (textEditText.text.toString().isEmpty() && textEditText.text.toString().isEmpty()){
+                } else if (textEditText.text.toString().isEmpty() && textEditText.text.toString()
+                        .isEmpty()
+                ) {
                     tvSave.visibility = View.GONE
                 }
             }
 
         })
-        ivBack.setOnClickListener{
+        ivBack.setOnClickListener {
             findNavController().navigateUp()
         }
-        tvSave.setOnClickListener{
+        tvSave.setOnClickListener {
             val title = titleEditText.text.toString()
             val text = textEditText.text.toString()
             val date = tvDate.text.toString()
@@ -145,9 +160,9 @@ class NoteDetailFragment : Fragment() {
                 updateNote.id = noteId!!
                 App.appDatabase?.noteDao()?.updateNote(updateNote)
 
-        }else {
-            App.appDatabase?.noteDao()
-                ?.insertNote(NoteModel(title, text, date, color.hashCode()))
+            } else {
+                App.appDatabase?.noteDao()
+                    ?.insertNote(NoteModel(title, text, date, color.hashCode()))
 
             }
 

@@ -20,9 +20,13 @@ class PreferenceHelper {
         sharedPref.edit().putBoolean("onBoardingCompleted", b).apply()
     }
 
-    fun isOnBoardingCompleted(): Boolean {
+    fun isOnBoardingCompleted(b: Boolean): Boolean {
         return sharedPref.getBoolean("onBoardingCompleted", true)
     }
+    var layoutManager: Boolean
+        get() = sharedPref.getBoolean("layoutManager", true)
+        set(value) = sharedPref.edit().putBoolean("layoutManager", value).apply()
+
     fun isLinearLayout(): Boolean {
         return sharedPref.getBoolean("isLinearLayout", true)
     }
